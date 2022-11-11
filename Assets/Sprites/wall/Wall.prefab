@@ -10,8 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7138859017103589226}
   - component: {fileID: 7138859017103589227}
-  - component: {fileID: 7138859017103589224}
-  - component: {fileID: 7138859017103589225}
   m_Layer: 0
   m_Name: Wall
   m_TagString: Untagged
@@ -29,7 +27,6 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3.8, y: -0.01, z: 0}
   m_LocalScale: {x: 1, y: 5, z: 1}
-  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -83,50 +80,6 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &7138859017103589224
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7138859017103589230}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
---- !u!114 &7138859017103589225
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7138859017103589230}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ff287f781b89e74388c53b5f5139861, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  textureList:
-  - {fileID: 2100000, guid: 05dedfc3a6369b149864b5fa04e821cc, type: 2}
-  - {fileID: 2100000, guid: 137c24344177cc84c947de0248b1ab56, type: 2}
-  - {fileID: 2100000, guid: f01ae419f9f405a4a9d20d80e4cf1aa9, type: 2}
-  lifeMax: 3
-  life: 2

@@ -7,13 +7,11 @@ public class Wall : MonoBehaviour
     public Material[] textureList;
     public int lifeMax = 3;
     public int life;
-    private int index = 3;
     private int currentLife;
 
     // Update is called once per frame
     void Start()
     {
-        textureList = new Material[lifeMax];
         int life = lifeMax;
         int currentLife = life;
     }
@@ -28,11 +26,22 @@ public class Wall : MonoBehaviour
     }
     private void Update()
     {
+        if (life == 0)
+        {
+            Destroy(gameObject, 0);
+        }
         if (life != currentLife) {
             TextureChange();
             currentLife = life;
-        }else if (life == 0){
-            Destroy(gameObject, 0);}
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        if(col.tag == "projectile")
+        {
+            TakeDamage();
+        }
     }
     
 }

@@ -13,6 +13,9 @@ public class PlayerController : MonoBehaviour
     public bool isGrounded = false;
     public float jumpHeight;
     public GameObject edgeCol;
+    public float recoil;
+    public float recoilDir;
+    public GameObject bullet;
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +28,10 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        rb = gameObject.GetComponent<Rigidbody2D>();
+
+        Recoil();
+
         if(Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A))
         {
             isMoving = true;
@@ -109,5 +116,27 @@ public class PlayerController : MonoBehaviour
         isStarted = false;
 
         yield return null;
+    }
+
+    void Recoil()
+    {
+        var dir = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
+        var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        //Debug.Log(angle);
+
+        if(angle > -90 && angle < 90)
+        {
+            recoilDir = -1f;
+        }
+        else
+        {
+            recoilDir = 1f;
+        }
+        
+        bullet = GameObject.Find("Bullet");
+        ShootingScript ss = bullet.GetComponent<ShootingScript>();
+        recoil = ss.recoil;
+        rb.AddForce(transform.right * recoil * recoilDir);
+        ss.recoil = 0f;
     }
 }

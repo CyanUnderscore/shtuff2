@@ -12,7 +12,7 @@ public class PlayerGroundedScript : MonoBehaviour
     {
         if(isStarted == false)
         {
-            StartCoroutine(CheckCol());
+            StartCoroutine(AutoCheckCol());
         }
 
         player = GameObject.Find("Player");
@@ -32,7 +32,7 @@ public class PlayerGroundedScript : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D col)
     {
-        if(col.tag == "ground")
+        if(col.tag == "ground" && gameObject.GetComponent<BoxCollider2D>().enabled == true)
         {
             isGrounded = false;
             //Debug.Log(isGrounded);
@@ -40,13 +40,13 @@ public class PlayerGroundedScript : MonoBehaviour
         }
     }
 
-    IEnumerator CheckCol()
+    IEnumerator AutoCheckCol()
     {
         isStarted = true;
         gameObject.GetComponent<BoxCollider2D>().enabled = false;
         yield return 0;
         gameObject.GetComponent<BoxCollider2D>().enabled = true;
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.2f);
         isStarted = false;
     }
 }
