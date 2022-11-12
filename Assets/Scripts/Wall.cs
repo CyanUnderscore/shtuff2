@@ -6,6 +6,7 @@ public class Wall : MonoBehaviour
 {
     public Material[] textureList;
     public int lifeMax, life = 3;
+	public bool breakable = true;
 
     void Start(){
         int currentLife = life;
@@ -17,6 +18,8 @@ public class Wall : MonoBehaviour
     }
 
     void TakeDamage(){
+		if(!breakable) return;
+
         if (life == 1){
             Destroy(gameObject, 0);
         }
