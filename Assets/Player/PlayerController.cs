@@ -7,13 +7,9 @@ public class PlayerController : MonoBehaviour
     public float speed;
     public Rigidbody2D rb;
     public float cap;
-    public float direction;
-    public bool isMoving = false;
-    public bool isGrounded = false;
     public float jumpHeight;
     public GameObject edgeCol;
     public float recoil;
-    public float recoilDir;
     public GameObject bullet;
 
     // Start is called before the first frame update
@@ -27,33 +23,23 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+		rb.velocity = new Vector3(rb.velocity.x * 0.95f, rb.velocity.y); // apply friction
+
         Recoil();
 
-        if(Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A)) isMoving = true;
-        else isMoving = false;
-
-        rb = gameObject.GetComponent<Rigidbody2D>();
+		float direction = 0f;
 
         if(Input.GetKey(KeyCode.D)) direction = 1f;
 		else if(Input.GetKey(KeyCode.A)) direction = -1f;
-		else direction = 0f;
 
-        if(isMoving)
-        {
-            if(rb.velocity.x*direction <= cap) // don't apply speed up beyond speed limit ( *direction switches velocity when it's negative )
-            {
-                rb.AddForce(transform.right * speed * direction);
-            }
-        }
-        else
-        {
-            rb.velocity = new Vector2(rb.velocity.x * 0.9f, rb.velocity.y); // apply friction
-        }
+		if(rb.velocity.x*direction <= cap) // don't apply speed up beyond speed limit ( *direction switches velocity when it's negative )
+		{
+			if(direction != 0f) rb.AddForce(transform.right * speed * direction);
+		}
 
         PlayerGroundedScript pgs = edgeCol.GetComponent<PlayerGroundedScript>();
-        isGrounded = pgs.isGrounded;
 
-        if(isGrounded == true && Input.GetKeyDown(KeyCode.Space))
+        if(pgs.isGrounded && Input.GetKeyDown(KeyCode.Space))
         {
             rb.AddForce(transform.up * jumpHeight);
         }
@@ -62,21 +48,10 @@ public class PlayerController : MonoBehaviour
     void Recoil()
     {
         var dir = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
-        var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        //Debug.Log(angle);
 
-        if(angle > -90 && angle < 90)
-        {
-            recoilDir = -1f;
-        }
-        else
-        {
-            recoilDir = 1f;
-        }
-        
         ShootingScript ss = bullet.GetComponent<ShootingScript>();
         recoil = ss.recoil;
-        rb.AddForce(transform.right * recoil * recoilDir);
+        rb.AddForce(-dir.normalized * recoil);
         ss.recoil = 0f;
     }
 }
