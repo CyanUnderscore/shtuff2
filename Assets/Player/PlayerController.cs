@@ -63,7 +63,6 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(Move());
         }
 
-        edgeCol = GameObject.Find("PlayerEdgeCollider");
         PlayerGroundedScript pgs = edgeCol.GetComponent<PlayerGroundedScript>();
         isGrounded = pgs.isGrounded;
 
@@ -93,7 +92,6 @@ public class PlayerController : MonoBehaviour
                 }
                 
             }
-
 
             if(rb.velocity.x <= 0 && rb.velocity.x >= -cap)
             {
@@ -133,7 +131,6 @@ public class PlayerController : MonoBehaviour
             recoilDir = 1f;
         }
         
-        bullet = GameObject.Find("Bullet");
         ShootingScript ss = bullet.GetComponent<ShootingScript>();
         recoil = ss.recoil;
         rb.AddForce(transform.right * recoil * recoilDir);

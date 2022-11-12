@@ -99,10 +99,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0
-  Prefab: {fileID: 0}
-  player: {fileID: 0}
+  Prefab: {fileID: 3175176206378246005}
+  player: {fileID: 7361162089472840428, guid: 6a130d93964a36c3b979ef82afe7fba9, type: 3}
   isStarted: 0
-  rb: {fileID: 0}
+  rb: {fileID: 3175176206378246001}
   recoil: 0
   weapon: 1
   offset: 0

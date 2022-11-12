@@ -19,8 +19,6 @@ public class ShootingScript : MonoBehaviour
         speed = 700f;
         weapon = 1;
 
-        rb = gameObject.GetComponent<Rigidbody2D>();
-        player = GameObject.Find("Player");
         PlayerWeaponScript pws = player.GetComponent<PlayerWeaponScript>();
         weapon = pws.weapon;
 
@@ -47,10 +45,12 @@ public class ShootingScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        rb = gameObject.GetComponent<Rigidbody2D>();
-        player = GameObject.Find("Player");
         PlayerWeaponScript pws = player.GetComponent<PlayerWeaponScript>();
         weapon = pws.weapon;
+
+		if(Vector2.Distance(transform.position, player.transform.position) > 100f) {
+			Destroy(gameObject);
+		}
 
         if(gameObject.name == "Bullet")
         {
@@ -72,7 +72,6 @@ public class ShootingScript : MonoBehaviour
             recoil = 250f;
             offset = 0f;
             isStarted = true;
-            player = GameObject.Find("Player");
 
             Instantiate(Prefab, player.transform.position, Quaternion.AngleAxis(angle + offset, Vector3.forward));
             yield return new WaitForSeconds(0.8f);
@@ -82,7 +81,6 @@ public class ShootingScript : MonoBehaviour
             recoil = 350f;
             offset = Random.Range(-10f, 10f);
             isStarted = true;
-            player = GameObject.Find("Player");
 
             Instantiate(Prefab, player.transform.position, Quaternion.AngleAxis(angle + offset, Vector3.forward));
             yield return new WaitForSeconds(0.1f);
